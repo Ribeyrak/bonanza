@@ -18,7 +18,7 @@ final class StartVC: UIViewController {
         static let back = "back"
         static let candy = "candy"
         static let firstLabel = "Bonanza Billion Game"
-        static let secondLabel = "pragmatic play"
+        static let secondLabel = "Pragmatic play"
         static let joinButton = "Join"
         static let logInButton = "Log in"
     }
