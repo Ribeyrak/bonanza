@@ -52,7 +52,7 @@ class MainVC: UIViewController {
         let v = UIPickerView()
         v.contentMode = .scaleToFill
         v.semanticContentAttribute = .unspecified
-        v.backgroundColor = .white//.withAlphaComponent(0.5)
+        v.backgroundColor = .white.withAlphaComponent(0.5)
         v.layer.cornerRadius = 10
         return v
     }()
@@ -104,7 +104,6 @@ class MainVC: UIViewController {
         super.viewWillAppear(animated)
         
         bindUI()
-        //updateBalance()
     }
     
     // MARK: - Private functions
@@ -176,7 +175,7 @@ class MainVC: UIViewController {
     func loadData() {
         for i in 0...3 {
             for _ in 0...100 {
-                dataArray[i].append(Int.random(in: 0...K.imageArray.count - 1))
+                dataArray[i].append(Int.random(in: 0...K.imageRollArray.count - 1))
             }
         }
     }
@@ -263,7 +262,14 @@ class MainVC: UIViewController {
     private func toggleSound() {
         isSoundOn.toggle()
         soundButton.setImage(UIImage(named: isSoundOn ? "soundOn" : "soundOff"), for: .normal)
-        player.volume = isSoundOn ? 1.0 : 0.0
+        
+        if isSoundOn {
+            winSound.volume(1.0)
+            rattle.volume(0.1)
+        } else {
+            winSound.volume(0.0)
+            rattle.volume(0.0)
+        }
     }
     
     private func nextVC() {
@@ -275,7 +281,7 @@ class MainVC: UIViewController {
         let test = RCValues.sharedInstance
             .updateBalance(forKey: .link)
         let temp = Int(test)
-        viewModel.profile.balance = temp ?? 500
+        viewModel.profile.balance = temp ?? 900
     }
     
 }
@@ -302,19 +308,21 @@ extension MainVC: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
-        let pickerLabel = UILabel()
+        let imageView = UIImageView()
         
         switch component {
-        case 0 : pickerLabel.text = K.imageArray[(Int)(dataArray[0][row])]
-        case 1 : pickerLabel.text = K.imageArray[(Int)(dataArray[1][row])]
-        case 2 : pickerLabel.text = K.imageArray[(Int)(dataArray[2][row])]
-        case 3 : pickerLabel.text = K.imageArray[(Int)(dataArray[3][row])]
+        case 0 : imageView.image = K.imageRollArray[(Int)(dataArray[0][row])]
+        case 1 : imageView.image = K.imageRollArray[(Int)(dataArray[1][row])]
+        case 2 : imageView.image = K.imageRollArray[(Int)(dataArray[2][row])]
+        case 3 : imageView.image = K.imageRollArray[(Int)(dataArray[3][row])]
         default : print("done")
         }
         
-        pickerLabel.font = UIFont(name : K.emojiFont, size : 65)
-        pickerLabel.textAlignment = NSTextAlignment.center
-        return pickerLabel
+//        pickerLabel.font = UIFont(name : K.emojiFont, size : 65)
+//        pickerLabel.textAlignment = NSTextAlignment.center
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = CGRect(x: 0, y: 0, width: 60, height: 80)
+        
+        return imageView
     }
 }

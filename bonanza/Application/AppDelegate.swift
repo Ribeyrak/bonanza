@@ -22,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
 //        AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         AppsFlyerLib.shared().delegate = self
 
-//        appsFID = AppsFlyerLib.shared().getAppsFlyerUID()
-//        print("AppsFlyer ID \(appsFID)")
         
         FirebaseApp.configure()
         _ = RCValues.sharedInstance
@@ -51,13 +49,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
             if (status == "Non-organic") {
                 // Business logic for Non-organic install scenario is invoked
                 if let sourceID = installData["media_source"],
-                   let campaign = installData["campaign"] {
+                   let campaign = installData["campaign"],
+                   let campaignID = installData["campaign_id"] {
                     print("This is a Non-organic install. Media source: \(sourceID)  Campaign: \(campaign)")
+                    if let window = UIApplication.shared.windows.first,
+                       let sceneDelegate = window.windowScene?.delegate as? SceneDelegate {
+                        sceneDelegate.utms = sourceID as! String
+                        sceneDelegate.campaign = campaign as! String
+                        sceneDelegate.campID = campaignID as! String
+                    }
                 }
-            }
-            else {
-                // Business logic for organic install scenario is invoked
-                print("This is an organic install")
+                else {
+                    // Business logic for organic install scenario is invoked
+                    print("This is an organic install")
+                    
+                }
             }
         }
     }

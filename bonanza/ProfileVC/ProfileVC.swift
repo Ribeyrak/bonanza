@@ -31,7 +31,7 @@ class ProfileVC: UIViewController {
     }
     
     private let getMoney = CustomButtom().then {
-        $0.setTitleAndColor("Get $", color: .systemGreen)
+        $0.setTitleAndColor("Get Points", color: .systemGreen)
         $0.layer.cornerRadius = 2
     }
     

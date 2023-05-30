@@ -16,7 +16,7 @@ struct ProfileModel: Codable {
     
     static var `default`: ProfileModel = .init(
         firstName: "enter Name",
-        balance: 500,
+        balance: 1000,
         phoneNumber: "+1234567890",
         userEmail: "example@mail.com",
         pasword: "1111"

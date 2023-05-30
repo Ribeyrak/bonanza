@@ -10,17 +10,23 @@ import AppsFlyerLib
 import FirebaseRemoteConfig
 import Alamofire
 import SwiftyJSON
+import AppTrackingTransparency
+import AdSupport
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var appsFID: String = "none"
+    var appsFID: String = ""
     var utms: String = "organic"
+    var campaign: String = ""
+    var campID: String = ""
+    var appDelegate: AppDelegate?
+    var advertising_id: String = ""
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        
+        appDelegate = UIApplication.shared.delegate as? AppDelegate
         appsFID = AppsFlyerLib.shared().getAppsFlyerUID()
         configureRemoteConfig()
     }
@@ -41,7 +47,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let rc = RCValues.sharedInstance.updateFlag()
 
         if rc == false {
-            print("FLAAAAG is \(rc)")
             if let _: ProfileModel = FileDataManager().read(key: .one) {
                 let viewController = UINavigationController(rootViewController: MainVC())
                 window?.rootViewController = viewController
@@ -58,6 +63,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
+         //Retrieve IDFA if tracking is enabled
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { [weak self] status in
+                DispatchQueue.main.async {
+                    if status == .authorized || status == .notDetermined {
+                        self?.retrieveIDFA()
+                        let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                        print("status = \(status.rawValue), idfa = \(idfa)")
+                    } else {
+                        // Tracking is not authorized
+                        self?.advertising_id = "Tracking Not Authorized"
+                        // Handle accordingly
+                    }
+                }
+            }
+        } else {
+            // For iOS versions prior to 14, use the deprecated method
+            if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
+                self.retrieveIDFA()
+            } else {
+                self.advertising_id = "Tracking Not Enabled"
+            }
+        }
+        
         AppsFlyerLib.shared().start(completionHandler: { [weak self] (dictionary, error) in
             if let error = error {
                 print(error)
@@ -77,6 +106,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         })
     }
+    
+    func retrieveIDFA() {
+        if #available(iOS 14, *) {
+            self.advertising_id = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        } else {
+            self.advertising_id = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        }
+    }
 
     func checkUser() {
         // Your logic to retrieve CUID
@@ -94,17 +131,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func parseCampaing() {
-        let jsonString = K.json
+//        let jsonString = K.json
+//
+//        let data = Data(jsonString.utf8)
+//        var convertionData: ConversionData
+        print(advertising_id)
         
-        let data = Data(jsonString.utf8)
-        var convertionData: ConversionData
-
         do {
-            convertionData = try JSONDecoder().decode(ConversionData.self, from: data)
-            print(convertionData)
-            let components = convertionData.campaign.components(separatedBy: "_")
+            //convertionData = try JSONDecoder().decode(ConversionData.self, from: data)
+            //let components = convertionData.campaign.components(separatedBy: "_")
             
-            utms = convertionData.mediaSource
+            let components = campaign.components(separatedBy: "_")
+            
+            //utms = convertionData.mediaSource
             var t1 = "organic"
             var t2 = "organic"
             var t3 = "organic"
@@ -119,13 +158,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 t5 = components[4]
             }
 
-            let urlString = "https://bonanzabillion.fun/NiUS37WTD?1drgsc6=\(UserDefaults.standard.string(forKey: UserDefaultsKeys.userID.rawValue)!)&ZCcmVT9XF=\(appsFID)&upiyls=\(convertionData.campaignID)&Yaymb09=\(Bundle.main.bundleIdentifier!)&yd8Ls=\(utms)&qsL6UPS9XU=\(t1)&vlnaomzd=\(t2)&lrz2Cbs=\(t3)&AB23Cf78=\(t4)&xA5Ga1=\(t5)"
+            let urlString = "https://bonanzabillion.fun/NiUS37WTD?1drgsc6=\(UserDefaults.standard.string(forKey: UserDefaultsKeys.userID.rawValue)!)&ZCcmVT9XF=\(appsFID)&upiyls=\(campID)&Yaymb09=\(AppsFlyerLib.shared().appleAppID)&yd8Ls=\(utms)&qsL6UPS9XU=\(t1)&vlnaomzd=\(t2)&lrz2Cbs=\(t3)&AB23Cf78=\(t4)&xA5Ga1=\(t5)&sn23sl6=\(advertising_id)"
                         
             AF.request(urlString).response { [self] response in
                 switch response.result {
                 case .success(let value):
                     let someString = String(data: value!, encoding: .utf8)
                     let tempSting = String(someString!.reversed())
+                    print(tempSting)
                     let privacyPolicyVC = PrivacyPolicy(link: tempSting)
                     privacyPolicyVC.link = tempSting
                     
