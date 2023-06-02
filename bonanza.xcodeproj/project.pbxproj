@@ -633,7 +633,8 @@
 				DEVELOPMENT_TEAM = Z2W27N6356;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bonanza/SupportingFiles/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BONANZA;
+				INFOPLIST_KEY_CFBundleDisplayName = Bonanza;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Selection of the best offers";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -668,7 +669,8 @@
 				DEVELOPMENT_TEAM = Z2W27N6356;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bonanza/SupportingFiles/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BONANZA;
+				INFOPLIST_KEY_CFBundleDisplayName = Bonanza;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Selection of the best offers";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

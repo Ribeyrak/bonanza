@@ -77,7 +77,6 @@ final class LoginVC: UIViewController, WKUIDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         bindUI()
     }
@@ -148,7 +147,6 @@ final class LoginVC: UIViewController, WKUIDelegate {
     // MARK: - Actions
     // TextFields Validation
     private func nextVC() {
-        
         if let name = nickNameField.text, let password = passwordField.text {
             if name.isEmpty || password.isEmpty {
                 Validator().simpleAlert(vc: self, title: Constants.nameAlertTitle, message: Constants.nameAlertMessage)

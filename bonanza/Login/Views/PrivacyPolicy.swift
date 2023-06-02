@@ -27,7 +27,7 @@ class PrivacyPolicy: UIViewController, WKUIDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
+    override func   loadView() {
         let webConfiguration = WKWebViewConfiguration()
         wView = WKWebView(frame: .zero, configuration: webConfiguration)
         wView.uiDelegate = self

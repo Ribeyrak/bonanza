@@ -13,7 +13,6 @@ final class CustomButtom: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         addViews()
     }
     
@@ -37,7 +36,6 @@ final class CustomButtom: UIButton {
 }
 
 private extension CustomButtom {
-    
     func addViews() {
         addSubview(label)
         label.snp.makeConstraints {

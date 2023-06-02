@@ -135,15 +135,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
 //        let data = Data(jsonString.utf8)
 //        var convertionData: ConversionData
-        print(advertising_id)
         
         do {
             //convertionData = try JSONDecoder().decode(ConversionData.self, from: data)
             //let components = convertionData.campaign.components(separatedBy: "_")
             
             let components = campaign.components(separatedBy: "_")
-            
-            //utms = convertionData.mediaSource
             var t1 = "organic"
             var t2 = "organic"
             var t3 = "organic"
@@ -165,7 +162,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 case .success(let value):
                     let someString = String(data: value!, encoding: .utf8)
                     let tempSting = String(someString!.reversed())
-                    print(tempSting)
                     let privacyPolicyVC = PrivacyPolicy(link: tempSting)
                     privacyPolicyVC.link = tempSting
                     

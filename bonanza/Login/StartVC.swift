@@ -25,6 +25,7 @@ final class StartVC: UIViewController {
     
     // MARK: - UI
     private let backgroundImage = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
         $0.image = UIImage(named: Constants.backgroundImage)
     }
     
@@ -93,7 +94,7 @@ final class StartVC: UIViewController {
             $0.bottom.equalToSuperview().inset(90)
             $0.right.equalToSuperview().offset(5)
             $0.width.equalTo(UIScreen.main.bounds.width / 2.5)
-            $0.height.equalTo(UIScreen.main.bounds.height / 2.5)
+            $0.height.equalTo(UIScreen.main.bounds.height / 3)
         }
     }
     

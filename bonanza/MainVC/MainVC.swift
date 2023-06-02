@@ -27,6 +27,7 @@ class MainVC: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     private let backgroundImage = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
         $0.image = UIImage(named: Constants.backgroundImage)
     }
     
@@ -44,18 +45,18 @@ class MainVC: UIViewController {
         return v
     }()
     
-    private let pickerViewBG = UIImageView().then {
-        $0.image = UIImage(named: Constants.border)
-    }
-    
     private let pickerView: UIPickerView = {
         let v = UIPickerView()
         v.contentMode = .scaleToFill
         v.semanticContentAttribute = .unspecified
-        v.backgroundColor = .white.withAlphaComponent(0.5)
+        v.backgroundColor = .purple.withAlphaComponent(0.5)
         v.layer.cornerRadius = 10
         return v
     }()
+    
+    private let pickerViewBG = UIImageView().then {
+        $0.image = UIImage(named: Constants.border)
+    }
     
     private let buttonSpin: UIButton = {
         let v = UIButton()
@@ -159,7 +160,7 @@ class MainVC: UIViewController {
         
         view.addSubview(pickerView)
         pickerView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+            //$0.centerX.equalToSuperview()
             $0.top.equalTo(scoreImage.snp.bottom).offset(20)
             $0.left.right.equalToSuperview().inset(33)
         }
@@ -173,9 +174,17 @@ class MainVC: UIViewController {
     }
     
     func loadData() {
+        //        for i in 0...3 {
+        //            for _ in 0...100 {
+        //                dataArray[i].append(Int.random(in: 0...K.imageRollArray.count - 1))
+        //            }
+        //        }
+        dataArray = Array(repeating: [], count: 4)
+        
         for i in 0...3 {
             for _ in 0...100 {
-                dataArray[i].append(Int.random(in: 0...K.imageRollArray.count - 1))
+                let randomIndex = Int.random(in: 0..<K.imageRollArray.count)
+                dataArray[i].append(randomIndex)
             }
         }
     }
@@ -300,16 +309,17 @@ extension MainVC : UIPickerViewDelegate {
 // MARK: - UIPickerViewDelegate
 extension MainVC: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return 80.0
+        return 70.0
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 120.0
+        return 100.0
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let imageView = UIImageView()
-        
+        imageView.contentMode = .scaleAspectFit
+
         switch component {
         case 0 : imageView.image = K.imageRollArray[(Int)(dataArray[0][row])]
         case 1 : imageView.image = K.imageRollArray[(Int)(dataArray[1][row])]
@@ -317,11 +327,15 @@ extension MainVC: UIPickerViewDataSource {
         case 3 : imageView.image = K.imageRollArray[(Int)(dataArray[3][row])]
         default : print("done")
         }
-        
-//        pickerLabel.font = UIFont(name : K.emojiFont, size : 65)
-//        pickerLabel.textAlignment = NSTextAlignment.center
-        imageView.contentMode = .scaleAspectFit
-        imageView.frame = CGRect(x: 0, y: 0, width: 60, height: 80)
+
+        imageView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+//        pickerView.addSubview(imageView)
+//        imageView.snp.makeConstraints { make in
+//            make.top.bottom.equalTo(pickerView)
+//            make.centerY.equalTo(pickerView)
+//            make.leading.equalTo(pickerView).offset(10)
+//            make.trailing.equalTo(pickerView).inset(10)
+//        }
         
         return imageView
     }

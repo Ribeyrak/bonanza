@@ -107,7 +107,7 @@ class ProfileVC: UIViewController {
     }
     
     private func setupUI() {
-        title = "Профіль"
+        title = "Profile"
         view.addSubview(stackView)
         
         [phoneTextField, emailTextField, firstNameTextField,balanceTextField,

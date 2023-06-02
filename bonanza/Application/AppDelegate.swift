@@ -10,7 +10,6 @@ import AppsFlyerLib
 import FirebaseCore
 import OneSignal
 
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
     
@@ -22,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
 //        AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         AppsFlyerLib.shared().delegate = self
 
-        
         FirebaseApp.configure()
         _ = RCValues.sharedInstance
         
@@ -70,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
     
     func onConversionDataFail(_ error: Error!) {
         if error != nil{
-            print("errGO")
+            print("error")
         }
     }
     
