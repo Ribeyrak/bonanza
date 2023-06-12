@@ -139,7 +139,7 @@ final class LoginVC: UIViewController, WKUIDelegate {
         }), for: .touchUpInside)
         
         privacyPolicyButton.addAction(.init(handler: { [self] _ in
-            let nextVC = PrivacyPolicy(link: RCValues.sharedInstance.updateLink(forKey: .link))
+            let nextVC = PrivacyPolicy()
             navigationController?.present(nextVC, animated: true)
         }), for: .touchUpInside)
     }

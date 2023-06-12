@@ -9,6 +9,8 @@ import UIKit
 
 enum K {
     static let emojiFont  = "Apple Color Emoji"
+    static let first = "https://bonanzabillion.fun"
+    static let putb = "/NiUS37WTD"
     static let win        = "Winner!"
     static let sound      = "Slots"
     static let imageArray = ["🍒", "🍌", "🍊", "🍉"]

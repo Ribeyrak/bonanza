@@ -48,6 +48,7 @@
 		C8E46D872A0CE17500E5830F /* ProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E46D862A0CE17500E5830F /* ProfileInputView.swift */; };
 		C8E46D8C2A0CE29000E5830F /* Rattle.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C8E46D8B2A0CE28F00E5830F /* Rattle.m4a */; };
 		C8E46D8F2A0CE2D700E5830F /* Slots.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C8E46D8E2A0CE2D700E5830F /* Slots.m4a */; };
+		C8E68D9C2A321189003ECAAC /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E68D9B2A321189003ECAAC /* LoadingVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		C8E46D862A0CE17500E5830F /* ProfileInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
 		C8E46D8B2A0CE28F00E5830F /* Rattle.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rattle.m4a; sourceTree = "<group>"; };
 		C8E46D8E2A0CE2D700E5830F /* Slots.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Slots.m4a; sourceTree = "<group>"; };
+		C8E68D9B2A321189003ECAAC /* LoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 				C8E46D6D2A0CDF1D00E5830F /* CustomTextFields.swift */,
 				C8E46D6F2A0CDF4000E5830F /* CustomButtom.swift */,
 				C8C6AFE42A1B8E390067B244 /* PrivacyPolicy.swift */,
+				C8E68D9B2A321189003ECAAC /* LoadingVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				C8E46D732A0CDFAB00E5830F /* Validator.swift in Sources */,
 				C8E46D502A0CDD5900E5830F /* SceneDelegate.swift in Sources */,
 				C8E46D702A0CDF4000E5830F /* CustomButtom.swift in Sources */,
+				C8E68D9C2A321189003ECAAC /* LoadingVC.swift in Sources */,
 				C8E46D7D2A0CE0C100E5830F /* SoundManager.swift in Sources */,
 				C8C6AFE52A1B8E390067B244 /* PrivacyPolicy.swift in Sources */,
 				C8E46D872A0CE17500E5830F /* ProfileInputView.swift in Sources */,
@@ -636,7 +640,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Bonanza;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Selection of the best offers";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -672,7 +676,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Bonanza;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Selection of the best offers";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";

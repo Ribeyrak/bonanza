@@ -174,11 +174,6 @@ class MainVC: UIViewController {
     }
     
     func loadData() {
-        //        for i in 0...3 {
-        //            for _ in 0...100 {
-        //                dataArray[i].append(Int.random(in: 0...K.imageRollArray.count - 1))
-        //            }
-        //        }
         dataArray = Array(repeating: [], count: 4)
         
         for i in 0...3 {
@@ -230,7 +225,6 @@ class MainVC: UIViewController {
     }
     
     func checkWinOrLose() {
-        // Проверка значения labelResult и установка состояния кнопки
         //buttonSpin.isEnabled = points != 50
         let emoji0 = pickerView.selectedRow(inComponent: 0)
         let emoji1 = pickerView.selectedRow(inComponent: 1)
@@ -328,15 +322,7 @@ extension MainVC: UIPickerViewDataSource {
         default : print("done")
         }
 
-        imageView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
-//        pickerView.addSubview(imageView)
-//        imageView.snp.makeConstraints { make in
-//            make.top.bottom.equalTo(pickerView)
-//            make.centerY.equalTo(pickerView)
-//            make.leading.equalTo(pickerView).offset(10)
-//            make.trailing.equalTo(pickerView).inset(10)
-//        }
-        
+        imageView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)        
         return imageView
     }
 }

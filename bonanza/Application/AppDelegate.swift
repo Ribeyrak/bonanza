@@ -17,8 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
                 
         AppsFlyerLib.shared().appsFlyerDevKey = "8pqP5YmEPztUDwDK7HTjC5"
         AppsFlyerLib.shared().appleAppID = "6449024925"
-//        AppsFlyerLib.shared().isDebug = true
-//        AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         AppsFlyerLib.shared().delegate = self
 
         FirebaseApp.configure()
@@ -35,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
         
         // Set your customer userId
         // OneSignal.setExternalUserId("userId")
-        
         return true
     }
     

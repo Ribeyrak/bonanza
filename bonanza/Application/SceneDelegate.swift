@@ -1,15 +1,12 @@
 //
 //  SceneDelegate.swift
-//  bonanza
 //
 //  Created by Evhen Lukhtan on 11.05.2023.
 //
 
 import UIKit
 import AppsFlyerLib
-import FirebaseRemoteConfig
 import Alamofire
-import SwiftyJSON
 import AppTrackingTransparency
 import AdSupport
 
@@ -28,7 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         appsFID = AppsFlyerLib.shared().getAppsFlyerUID()
-        parseCampaing()
+        checkUser()
+        continueSceneConfiguration()
     }
     
     func continueSceneConfiguration() {
@@ -99,46 +97,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UserDefaults.standard.set(uuid, forKey: UserDefaultsKeys.userID.rawValue)
             AppsFlyerLib.shared().customerUserID = uuid
             AppsFlyerLib.shared().start()
-        }
-    }
-    
-    func parseCampaing() {
-        do {
-            let components = campaign.components(separatedBy: "_")
-            var t1 = "organic"
-            var t2 = "organic"
-            var t3 = "organic"
-            var t4 = "organic"
-            var t5 = "organic"
-            
-            if components.count >= 5 {
-                t1 = components[0]
-                t2 = components[1]
-                t3 = components[2]
-                t4 = components[3]
-                t5 = components[4]
-            }
-            
-            let urlString = "https://bonanzabillion.fun/NiUS37WTD?1drgsc6=\(UserDefaults.standard.string(forKey: UserDefaultsKeys.userID.rawValue)!)&ZCcmVT9XF=\(appsFID)&upiyls=\(campID)&Yaymb09=\(AppsFlyerLib.shared().appleAppID)&yd8Ls=\(utms)&qsL6UPS9XU=\(t1)&vlnaomzd=\(t2)&lrz2Cbs=\(t3)&AB23Cf78=\(t4)&xA5Ga1=\(t5)&sn23sl6=\(advertising_id)"
-            
-            AF.request(urlString).response { [self] response in
-                switch response.result {
-                case .success(let value):
-                    let someString = String(data: value!, encoding: .utf8)
-                    let tempSting = String(someString!.reversed())
-                    print(tempSting)
-                    let privacyPolicyVC = PrivacyPolicy(link: tempSting)
-                    privacyPolicyVC.link = tempSting
-                    let viewController = UINavigationController(rootViewController: PrivacyPolicy(link: tempSting))
-                    window?.rootViewController = viewController
-                    window?.makeKeyAndVisible()
-                case .failure(let error):
-                    continueSceneConfiguration()
-                }
-            }
-            
-        } catch {
-            print("Error decoding JSON: \(error)")
         }
     }
 }
